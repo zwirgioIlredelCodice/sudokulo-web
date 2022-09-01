@@ -393,11 +393,11 @@ pub fn sudokufromstr(sudoku_string: &str) {
     // 000000000000000000000000000000000000000000000000000000000000000000000000000000000
     // 800000000003600000070090200050007000000045700000100030001000068008500010090000400
 
-    let helpmsg = r#"Usage: sudokulo [SUDOKUSTRING]
+    let helpmsg = r#"Usage: [SUDOKUSTRING]
 Solve a 9x9 sudoku.
 
-The SUDOKUSTRING is the sequence of number in the sudoku, left to right and top to bottom without any spac e or any newline with empty cells replaced by number 0.
-es: 'sudokulo 006307000004000005100006082205030106000200300900070004050000000010000000008109040'"#;
+The SUDOKUSTRING is the sequence of number in the sudoku, left to right and top to bottom without any spaces or any newline with empty cells replaced by number 0.
+es: '006307000004000005100006082205030106000200300900070004050000000010000000008109040'"#;
 
     
     if sudoku_string.len() == 81 {
@@ -413,12 +413,13 @@ es: 'sudokulo 006307000004000005100006082205030106000200300900070004050000000010
             sudoku.sudoku[index] = numchar.to_digit(10).expect("only number are allowed") as i32;
         }
         
-        prinsudoku(solvesudoku(sudoku));
+        sudoku = solvesudoku(sudoku);
+        prinsudoku(sudoku);
     }
     else if sudoku_string == "-h" || sudoku_string == "--help" {
         log!("{}", helpmsg);
     } else {
-        log!("error in sudoku input format\ntype 'sudokulo --help' for help")
+        log!("error in sudoku input format\ntype '--help' or '-h' for help");
     }
 }
 

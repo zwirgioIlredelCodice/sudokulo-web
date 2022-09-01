@@ -9,23 +9,78 @@
 </head>
 
 <body>
-  <script type="module">
-    import init, { sudokufromstr } from "./pkg/sudokulo_web.js";
-    function solvesudokujs() {
-      let sudokustr = document.getElementById(sudokustr).value;
-      init()
-        .then(() => {
-          function solvesudokujs() {
-            let sudokustr = document.getElementById("sudokustr").value;
-            sudokufromstr(sudokustr);
-          }
-        });
-    }
-  </script>
+
   <h1>Sudokulo Web</h1>
   <p>solve any 9X9 sudoku in no time :)</p>
-  <input type="text" id="sudokustr" name="sudokustr" required minlength="81" maxlength="81" size="81">
-  <button onclick="solvesudokujs()">solve</button>
+
+  <h2>How to insert</h2>
+  <p>you have to insert the sequence of number in the sudoku, left to right and top to bottom without any spaces or any newline with empty cells replaced by number 0</p>
+  <h3>Example</h3>
+  <pre>
+1..|...|7..
+.2.|...|5..
+6..|38.|...
+-----------
+.78|...|...
+...|6.9|...
+...|...|14.
+-----------
+...|.25|..9
+..3|...|.6.
+..4|...|..2
+  </pre>
+  <p style="line-break: anywhere;">Becomes 100000700020000500600380000078000000000609000000000140000025009003000060004000002</p>
+
+  <p>For additional help insert --help or -h</p>
+
+  <h3>Insert the sudoku</h3>
+
+  <input type="text" id="sudokustr" name="sudokustr" required minlength="81" maxlength="81">
+  <button id="button">solve</button>
+
+  <h3>Solution</h3>
+  <div id="console">
+    <p>no sudoku solved yet</p>
+  </div>
+
+  <h2>How it works</h2>
+  <p>...</p>
+
+  <h3>Tecnologies used</h3>
+  <ul>
+    <li><a href="https://www.rust-lang.org/">Rust</a></li>
+    <li><a href="https://webassembly.org/">WebAssembly</a></li>
+    <li><a href="https://it.wikipedia.org/wiki/HTML5">HTML5</a></li>
+  </ul>
+
+  <script type="module">
+    import init, { sudokufromstr } from "./pkg/sudokulo_web.js";
+    init()
+      .then(() => {
+        const mybutton = document.getElementById("button");
+        mybutton.addEventListener("click", solvesudokujs);
+
+        function solvesudokujs() {
+          const myinput = document.getElementById("sudokustr");
+          let sudokustr = "";
+          sudokustr = myinput.value;
+          sudokufromstr(sudokustr);
+        }
+      });
+  </script>
+  <script>
+    if (window.console) console = {
+      log: function () {
+        document.getElementById('console').innerHTML = "";
+        var output = '',
+          console = document.getElementById('console');
+        for (var i = 0; i < arguments.length; i++) {
+          output += arguments[i] + ' ';
+        }
+        console.innerText += output + "\n";
+      }
+    }
+  </script>
 </body>
 
 </html>
