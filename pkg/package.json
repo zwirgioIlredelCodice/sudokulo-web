@@ -1,0 +1,12 @@
+{
+  "name": "sudokulo-web",
+  "version": "0.1.0",
+  "files": [
+    "sudokulo_web_bg.wasm",
+    "sudokulo_web.js",
+    "sudokulo_web.d.ts"
+  ],
+  "module": "sudokulo_web.js",
+  "types": "sudokulo_web.d.ts",
+  "sideEffects": false
+}
